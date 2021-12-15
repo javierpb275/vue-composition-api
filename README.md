@@ -1,4 +1,4 @@
-# section-21-3
+# vue-composition-api
 
 ## Project setup
 ```
