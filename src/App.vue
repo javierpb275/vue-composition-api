@@ -6,7 +6,8 @@
     <p>{{ name }}</p>
     <input type="text" v-model="phrase" />
     <p>{{ reversedPhrase }}</p>
-    <alert :user="user"/>
+    <alert :user="user" />
+    <button type="button" ref="btn">Button</button>
   </div>
 </template>
 
@@ -20,20 +21,23 @@ import {
   onBeforeMount,
   onMounted,
 } from "vue";
-import Alert from './components/Alert.vue';
+import Alert from "./components/Alert.vue";
 
 export default {
   name: "App",
   components: {
-    Alert
+    Alert,
   },
   setup() {
+    const btn = ref(null);
+
     onBeforeMount(() => {
       console.log("onBeforeMount()");
     });
 
     onMounted(() => {
       console.log("onMounted()");
+      btn.value.addEventListener("click", () => console.log("button clicked"));
     });
 
     let num = ref(0);
@@ -72,7 +76,8 @@ export default {
       phrase,
       reversedPhrase,
       double,
-      user
+      user,
+      btn,
     };
   },
 };
