@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>{{ num }}</p>
+    <p>{{double}}</p>
     <button type="button" @click.prevent="increment">increment</button>
     <p>{{name}}</p>
     <input type="text" v-model="phrase"/>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch } from "vue";
+import { ref, reactive, toRefs, watch, computed } from "vue";
 
 export default {
   name: "App",
@@ -38,12 +39,15 @@ export default {
       reversedPhrase.value = phrase.value.split("").reverse().join("");
     });
 
+    const double = computed(() => num.value*2);
+
     return {
       num,
       increment,
       ...toRefs(user),
       phrase,
-      reversedPhrase
+      reversedPhrase,
+      double
     };
   },
 };
