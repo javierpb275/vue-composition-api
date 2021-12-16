@@ -10,11 +10,20 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed } from "vue";
+import { ref, reactive, toRefs, watch, computed, onBeforeMount, onMounted } from "vue";
 
 export default {
   name: "App",
   setup(props) {
+
+    onBeforeMount(() => {
+      console.log('onBeforeMount()');
+    });
+
+    onMounted(() => {
+      console.log("onMounted()");
+    });
+
     let num = ref(0);
 
     const increment = () => num.value++;
