@@ -8,7 +8,8 @@ import { computed } from "vue";
 export default {
   name: "Alert",
   props: ["user"],
-  setup(props) {
+  setup(props, context) {
+    //context.emit('eventName', {})
     const flag = computed(() => props.user.name === "Pepe");
     return {
       flag,
