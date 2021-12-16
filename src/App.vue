@@ -12,16 +12,10 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  toRefs,
-  watch,
-  computed,
-  onBeforeMount,
-  onMounted,
-} from "vue";
+import { ref, reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import Alert from "./components/Alert.vue";
+import { useNumber } from "./hooks/number";
+import { usePhrase } from "./hooks/phrase";
 
 export default {
   name: "App",
@@ -40,10 +34,6 @@ export default {
       btn.value.addEventListener("click", () => console.log("button clicked"));
     });
 
-    let num = ref(0);
-
-    const increment = () => num.value++;
-
     const user = reactive({
       name: "Pepe",
       age: 24,
@@ -53,21 +43,9 @@ export default {
       user.name = "Paco";
     }, 3000);
 
-    const phrase = ref("");
-    const reversedPhrase = ref("");
+    const { num, increment, double } = useNumber();
 
-    /* watch([phrase], ([newVal], [oldVal]) => {
-      reversedPhrase.value = phrase.value.split("").reverse().join("");
-    }); */
-
-    watch(() => {
-      reversedPhrase.value = phrase.value
-        .split("")
-        .reverse()
-        .join("");
-    });
-
-    const double = computed(() => num.value * 2);
+    const { phrase, reversedPhrase, num: phraseNum } = usePhrase();
 
     return {
       num,
@@ -78,6 +56,7 @@ export default {
       double,
       user,
       btn,
+      phraseNum,
     };
   },
 };
