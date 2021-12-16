@@ -1,23 +1,30 @@
 <template>
   <div>
     <p>{{ num }}</p>
-    <p>{{double}}</p>
+    <p>{{ double }}</p>
     <button type="button" @click.prevent="increment">increment</button>
-    <p>{{name}}</p>
-    <input type="text" v-model="phrase"/>
-    <p>{{reversedPhrase}}</p>
+    <p>{{ name }}</p>
+    <input type="text" v-model="phrase" />
+    <p>{{ reversedPhrase }}</p>
   </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch, computed, onBeforeMount, onMounted } from "vue";
+import {
+  ref,
+  reactive,
+  toRefs,
+  watch,
+  computed,
+  onBeforeMount,
+  onMounted,
+} from "vue";
 
 export default {
   name: "App",
-  setup(props) {
-
+  setup() {
     onBeforeMount(() => {
-      console.log('onBeforeMount()');
+      console.log("onBeforeMount()");
     });
 
     onMounted(() => {
@@ -29,12 +36,12 @@ export default {
     const increment = () => num.value++;
 
     const user = reactive({
-      name: 'Pepe',
-      age: 24
+      name: "Pepe",
+      age: 24,
     });
 
     setTimeout(() => {
-      user.name = 'Paco'
+      user.name = "Paco";
     }, 3000);
 
     const phrase = ref("");
@@ -45,10 +52,13 @@ export default {
     }); */
 
     watch(() => {
-      reversedPhrase.value = phrase.value.split("").reverse().join("");
+      reversedPhrase.value = phrase.value
+        .split("")
+        .reverse()
+        .join("");
     });
 
-    const double = computed(() => num.value*2);
+    const double = computed(() => num.value * 2);
 
     return {
       num,
@@ -56,7 +66,7 @@ export default {
       ...toRefs(user),
       phrase,
       reversedPhrase,
-      double
+      double,
     };
   },
 };
